@@ -1,4 +1,7 @@
 package presentacio.controladorsVistes;
+import presentacio.vistes.VistaGraella;
+
+import java.awt.Point;
 
 public class ControladorTaula {
 
@@ -6,7 +9,15 @@ public class ControladorTaula {
      * Controlador el qual la seva funcio principal és controlar tot el que passa a la taula principal i que ens ajuda
      * a comunicar-nos amb la resta de controladors.
      */
-    public ControladorTaula(){}
+
+    private VistaGraella taula;
+    private ControladorVistaPrincipal cntrlVp;
+
+    public ControladorTaula(ControladorVistaPrincipal inp){
+        cntrlVp = inp;
+
+        taula = new VistaGraella();
+    }
 
     /**
      * Funció que es crida quan el usuari vol copiar el valor de una cel·la
@@ -106,5 +117,12 @@ public class ControladorTaula {
      * @post: tenim el valor de la cel·la que volem.
      */
     public void obtenirValorCella(){}
+
+    /**
+     * Funcio encarregada d'obtenir el valor de les coordenades la cel·la seleccionada.
+     * @pre: Ha d'haver-hi una cel·la seleccionada.
+     * @post: tenim el valor de les coordenades de la cel·la que volem.
+     */
+    public void obtenirCoordenadesCella(){}
 
 }

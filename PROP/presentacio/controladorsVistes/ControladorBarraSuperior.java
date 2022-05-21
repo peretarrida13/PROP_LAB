@@ -1,11 +1,20 @@
 package presentacio.controladorsVistes;
 
+import presentacio.vistes.VistaMenuBar;
+
 public class ControladorBarraSuperior {
     /**
      * Classe encarregada de comunicar la barra superior amb el controlador de domini i amb la part de la graella de la
      * part principal
      */
-    public ControladorBarraSuperior(){}
+    private VistaMenuBar menu;
+    private ControladorVistaPrincipal cntlVp;
+
+    public ControladorBarraSuperior(ControladorVistaPrincipal inp){
+        menu = new VistaMenuBar();
+        cntlVp = inp;
+
+    }
 
     /**
      * Obté el valor de la cel·la que l'usuari ha clicat.
@@ -21,7 +30,9 @@ public class ControladorBarraSuperior {
     /**
      * Funcio que ens dona les coordenades de la cel·la que l'usuari a clicat.
      */
-    public void obtenirCoordenadesCella(){}
+    public void obtenirCoordenadesCella(){
+
+    }
 
     /**
      * Funció encarregada de guardar el nou valor de la cel·la un cop hi hagi un unfocus d'aquesta.
