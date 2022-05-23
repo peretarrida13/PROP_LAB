@@ -1,19 +1,29 @@
 package presentacio.controladorsVistes;
 import presentacio.vistes.VistaGraella;
 
-import java.awt.Point;
-
-public class ControladorTaula {
+public class ControladorGraella {
 
     /**
      * Controlador el qual la seva funcio principal és controlar tot el que passa a la taula principal i que ens ajuda
      * a comunicar-nos amb la resta de controladors.
      */
 
+    /**
+     * Variable que conté la taula principal tots els components i totes les seves funcionalitats.
+     */
     private VistaGraella taula;
+
+    /**
+     * Controlador de la vista principal que ens ajuda a communicarnos amb la vista principal.
+     */
     private ControladorVistaPrincipal cntrlVp;
 
-    public ControladorTaula(ControladorVistaPrincipal inp){
+    /**
+     * Funció creadora que activa el frame i inicialtza el controlador de la vista principal amb el parametre que se li
+     * passa
+     * @param inp Controlador de la vista principal que ens ajuda a mantenir tot comunicat.
+     */
+    public ControladorGraella(ControladorVistaPrincipal inp){
         cntrlVp = inp;
 
         taula = new VistaGraella();

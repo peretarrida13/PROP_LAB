@@ -4,19 +4,27 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-import java.io.File;
 import java.util.*;
 
-public class VistaMenuFulles {
+public class VistaBarraFulles {
+    /**
+     * Classe encarregada de crear i gestionar el menu de sota que ens permet intereccionar amb les diverses funcionalitats
+     * que tenen les fulles i accedir algunes d'aquestes funcionalitats de manera ràpida mitjançant botons.
+     */
+
+    /**
+     * Panel que conté tots els botons i funcionalitas d'una fulla.
+     */
     public JPanel panelFulles;
 
-    //es per contenir la fulla activa pero no fara falta a la part final ja que farem un render cada cop que canviem de fulla.
-    static String fullaActiva;
 
-    /*
-        part de sota del mainframe que apareix amb els botons de canviar de fulla i amb els botons per afegir eliminar fulla
-    */
-    public VistaMenuFulles(JFrame mainFrame, HashMap<String, JScrollPane> fulles){
+    /**
+     * Funció Constructora encarregada d'afegir els botons que li toca a i les funcionalitats d'aquests. Aquesta funció
+     * té com a parametre un frame ja que d'aquesta manera al treure el menu de pop ups surt al centre de la pantalla i
+     * com no té un enter permet que si volem canviar el valor d'algun d'aquests parametres no haurem de tocar res.
+     * @param mainFrame Frame principal en el cual activa els pop ups
+     */
+    public VistaBarraFulles(JFrame mainFrame){
         panelFulles = new JPanel();
 
         for(int i = 1; i <= 3; ++i){
@@ -34,9 +42,6 @@ public class VistaMenuFulles {
                     gbc.fill = GridBagConstraints.BOTH;
 
                     //mainFrame.remove(0);
-                    mainFrame.add(fulles.get(btn.getText()), gbc);
-                    mainFrame.revalidate();
-                    fullaActiva = btn.getText();
                     System.out.println(btn.getText());
                 }
             });
@@ -57,9 +62,7 @@ public class VistaMenuFulles {
         eliminarFulla.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                fulles.remove(fullaActiva);
-                fullaActiva = "1";
-                System.out.println(fulles.size());
+
             }
         });
         
@@ -79,9 +82,12 @@ public class VistaMenuFulles {
         panelFulles.add(menu);
     }
 
-    /*
-        menu que apareix al fer click dret a la zona de botons de la fulla.
-    */
+    /**
+     * Funció que nosaltres creem per quan fem click dret ens dongui les diverses opcions que podem realitzar en una fulla
+     * podem d'aquesta manera veure el JPopUpMenu
+     * @param mainFrame Frame actual del que extreiem les mides d'amplada i alçada.
+     * @return Retorna el menu que apareixerà quan fem click dret en el menú de fulles.
+     */
     private static JPopupMenu fullaClickDret(JFrame mainFrame){
         JPopupMenu menu = new JPopupMenu("menu");
         
@@ -115,9 +121,10 @@ public class VistaMenuFulles {
         return menu;
     }
 
-    /*
-        pop up que surt quan volem canviar el nom de la fulla en questió
-    */
+    /**
+     * Menú que apareix al fer click en el botó de canviar el nom de la fulla.
+     * @return Retorna el menu que apareixerà quan fem click en el botó de canviar el nom.
+     */
     private static JPopupMenu menuCanviarNom(){
         JPopupMenu menu = new JPopupMenu("menu");
         JLabel text = new JLabel("Introdueix el nou nom de la fulla actual:");

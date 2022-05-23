@@ -1,13 +1,14 @@
 package presentacio.vistes;
 
+import presentacio.controladorsVistes.ControladorApp;
+
 public class App {
-
+    /**
+     * Classe principal que reunirà el controlador i inicialitzà l'aplicació.
+     */
     public static void main(String args[]){
-        VistaPrincipal vp = new VistaPrincipal();
-        VistaBenvinguda vb = new VistaBenvinguda(vp);
+        ControladorApp app = new ControladorApp();
 
-        vb.setMainWSVisible(true);
-        vp.setMainVPVisible(false);
-        System.out.println("Hello world");
+        app.oberirBenvinguda();
     }
 }

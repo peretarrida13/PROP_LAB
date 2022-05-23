@@ -8,30 +8,36 @@ import java.io.File;
 import java.util.*;
 
 public class VistaMenuBar {
+    /**
+     * Classe encarregada de crear i inicilitzar el menu de la part superior que conté totes les funcionalitats que
+     * s'usen freqüentment o no tant freqüentment en el programa.
+     */
 
+    /**
+     * Menu principal de la part superior del programa.
+     */
     public JMenuBar menuBar;
 
+    /**
+     * Menu que apareix quan volem afegir una fulla nova.
+     */
     static JFrame menuAfegirFulla;
 
-    public JPanel topTextBar;
-
-    static JTextField topBarInp;
-
-    /*
-        retorna el menu complet que s'afegira a dalt del mainframe.
-    */
-    public VistaMenuBar(JFrame mainFrame, JLabel selectedCell, String fullaActiva, HashMap<String, JScrollPane> fulles) {
+    /**
+     * Funcio creadora que inicialitza la barra del menu amb tots els submenus corresponents.
+     * @param mainFrame Passem el mainFrame per poder fer el display correctament dels parametres en el centre de la pantalla.
+     */
+    public VistaMenuBar(JFrame mainFrame) {
         menuBar = new JMenuBar();
         menuBar.add(DocumentMenu());
-        menuBar.add(FullaMenu(mainFrame, fullaActiva, fulles));
+        menuBar.add(FullaMenu(mainFrame));
         menuBar.add(BlocMenu(mainFrame));
         menuBar.add(FuncionsMenu());
-
-        topTextBar = topTextBar(mainFrame, selectedCell);
     }
 
-    /*
-        retorna la part de document del menu 
+    /**
+     * Funció encarregada de crear la part que corresponent al document a la part superior.
+     * @return El menu que s'ha d'afegir a la part superior de la pantalla.
     */
     private static JMenu DocumentMenu() {
         JMenu fileMenu = new JMenu("Document");
@@ -44,10 +50,6 @@ public class VistaMenuBar {
                 fileInput.showSaveDialog(fileInput);
 
                 File f = fileInput.getSelectedFile();
-
-                // csv writer = new csv();
-
-                // writer.write(f.getAbsolutePath());
             }
         });
         
@@ -55,10 +57,12 @@ public class VistaMenuBar {
         return fileMenu;
     }
 
-    /*
-        retorna la part de fulla del menu
-    */
-    private static JMenu FullaMenu(JFrame mainFrame, String fullaActiva, HashMap<String, JScrollPane> fulles) {
+    /**
+     * Funció que crea la part del menu corresponent a la fulla.
+     * @param mainFrame MainFrame del que extreiem les dimensions.
+     * @return retorna el menu de les fulles amb totes les funcionalitats.
+     */
+    private static JMenu FullaMenu(JFrame mainFrame) {
         JMenu fileMenu = new JMenu("Fulla");
         JMenuItem newItem = new JMenuItem(new AbstractAction("Afegir Fulla") {
             public void actionPerformed(ActionEvent e) {
@@ -70,9 +74,7 @@ public class VistaMenuBar {
 
         JMenuItem deleItem = new JMenuItem(new AbstractAction("Eliminar Fulla") {
             public void actionPerformed(ActionEvent e) {
-                fulles.remove(fullaActiva);
-                // fullaActiva = "1";
-                System.out.println(fulles.size());
+                //avisa el controlador que vol eliminar una fulla
             }
         });
 
@@ -127,9 +129,11 @@ public class VistaMenuBar {
         return fileMenu;
     }
 
-        /*
-        retorna la part de bloc del menu
-    */
+    /**
+     * Funció que crea la part del menu corresponent a la Bloc.
+     * @param mainFrame MainFrame del que extreiem les dimensions.
+     * @return retorna el menu de les fulles amb totes les funcionalitats.
+     */
     private static JMenu BlocMenu(JFrame mainFrame) {
         JMenu fileMenu = new JMenu("Bloc");
         //ELIMINA EL DOCUMENT ACTUAL I TREU UN POP UP PER QUE ENTRI LES FILES COLUMNES ETC. treure pop up alertant.
@@ -163,9 +167,10 @@ public class VistaMenuBar {
         return fileMenu;
     }
 
-    /*
-        retorna la part de les funcions del menu.
-    */
+    /**
+     * Funció encarregada de crear la part que corresponent a les funcions a la part superior.
+     * @return El menu que s'ha d'afegir a la part superior de la pantalla.
+     */
     private static JMenu FuncionsMenu() {
         //TOT AQUEST S'IMPLEMENTARA AMB EL CONTROLADOR DE DOMINI PASSANT ELS VALORS DE LA CEL·LA.
         JMenu fileMenu = new JMenu("Funcions");
@@ -227,9 +232,10 @@ public class VistaMenuBar {
         return fileMenu;
     }
 
-    /*
-        menu que apareix al buscar una paraula al voler remplezar.
-    */
+    /**
+     * Menu Pop Up que surt quan volem remplaçar una paraula en la taula.
+     * @return El menu que ens ajudarà a remplaçar les paraules.
+     */
     private static JPopupMenu menuRemplazar(){
         JPopupMenu menu = new JPopupMenu("menu");
 
@@ -263,9 +269,10 @@ public class VistaMenuBar {
         return menu;
     }
 
-    /*
-        retorna el pop up menu per seleccionar el bloc aixo marxara si aconsegueixo fer lo de seleccionar bloc pero nidea de com polles es fa
-    */
+    /**
+     * Menu Pop Up que surt quan volem Seleccionar un bloc en una taula.
+     * @return El menu que ens ajudarà a seleccionar un bloc.
+     */
     private static JPopupMenu seleccionarBloc(){
         JPopupMenu menu = new JPopupMenu("menu");
 
@@ -293,9 +300,10 @@ public class VistaMenuBar {
         return menu;
     }
 
-    /*
-        menu que apareix al buscar una paraula dins de la fulla.
-    */
+    /**
+     * Menu Pop Up que surt quan volem buscar una paraula en la taula.
+     * @return El menu que ens ajudarà a buscar la paraula.
+     */
     private static JPopupMenu menuBuscar(){
         JPopupMenu menu = new JPopupMenu("menu");
         JLabel text = new JLabel("Introdueix la paraula que vols buscar:");
@@ -317,9 +325,10 @@ public class VistaMenuBar {
         return menu;
     }
 
-    /*
-        pop up que surt quan volem canviar el nom de la fulla en questió
-    */
+    /**
+     * Menu Pop Up que surt quan volem canviar-li el nom a una fulla.
+     * @return El menu que ens ajudarà a canvair el nom a la fulla.
+     */
     private static JPopupMenu menuCanviarNom(){
         JPopupMenu menu = new JPopupMenu("menu");
         JLabel text = new JLabel("Introdueix el nou nom de la fulla actual:");
@@ -339,23 +348,5 @@ public class VistaMenuBar {
         
         menu.add(aux);
         return menu;
-    }  
-
-    private static JPanel topTextBar(JFrame mainFrame, JLabel selectedCell){
-        JPanel topBar = new JPanel(new FlowLayout(FlowLayout.LEFT));
-
-        JPanel cellContainer = new JPanel();
-
-        selectedCell = new JLabel("A1");
-        cellContainer.add(selectedCell);
-        
-        topBar.add(cellContainer);
-
-        topBarInp = new JTextField("valor cella");
-        topBarInp.setPreferredSize(new Dimension(mainFrame.getWidth() - 55, 30));
-
-        topBar.add(topBarInp);
-
-        return topBar;
     }
 }

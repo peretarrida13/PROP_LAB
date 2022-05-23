@@ -7,12 +7,26 @@ import java.awt.event.*;
 import java.io.File;
 
 public class VistaBenvinguda {
+    /**
+     * Funció encarregada de gestionar la primera vista que li apareix al usuari al executar la app. en aquesta el usuari
+     * podrà escollir si vol importar un document o un crear un de nou.
+     */
 
+    /**
+     * Frame principal que contindrà tots els components possibles d'aquest.
+     */
     JFrame mainWelcomeScreen;
 
+    /**
+     * Frame que apareixerar a l'hora que l'usuari vulgui crear un document nou.
+     */
     JFrame menuCrear;
 
-    public VistaBenvinguda(VistaPrincipal vp){
+    /**
+     * Funció creadora que tenim que inicialitza el Frame principal amb tots els seus components i les seves respectives
+     * funcionalitats.
+     */
+    public VistaBenvinguda(){
         mainWelcomeScreen = new JFrame("Welcome");
         mainWelcomeScreen.getContentPane().setLayout(new GridBagLayout());
 
@@ -48,7 +62,7 @@ public class VistaBenvinguda {
                     if(selectedFile.getAbsolutePath() != null){
                         menuCrear.setVisible(false);
                         mainWelcomeScreen.setVisible(false);
-                        vp.setMainVPVisible(true);
+
                     }
                 }
             }
@@ -58,14 +72,12 @@ public class VistaBenvinguda {
         menu.add(createBTN);
         menu.add(importBTN);
         mainWelcomeScreen.add(menu);
-
-        subMenuCrearDocument(vp);
     }
 
-    /*
-      Funcio encarregada d'inicialitzar el submenu per crear el document.
-  */
-    private void subMenuCrearDocument(VistaPrincipal vp){
+    /**
+     * Funcio encarregada de inicialitzar el frame del menu que apareix al crear un nou document.
+     */
+    private void subMenuCrearDocument(){
         menuCrear = new JFrame("Crear");
         menuCrear.getContentPane().setLayout(new GridBagLayout());
 
@@ -86,7 +98,6 @@ public class VistaBenvinguda {
             public void actionPerformed(ActionEvent e){
                 menuCrear.setVisible(false);
                 mainWelcomeScreen.setVisible(false);
-                vp.setMainVPVisible(true);
             }
         });
 
@@ -100,6 +111,10 @@ public class VistaBenvinguda {
         menuCrear.setVisible(false);
     }
 
+    /**
+     * Funció encarregada de mostrar o amagar la pantalla en funció que l'usuari vulgui.
+     * @param bool parametre que es passara a la funció i ens indica si em de mostrar el frame o no.
+     */
     public void setMainWSVisible(Boolean bool) {
         mainWelcomeScreen.setVisible(bool);
     }

@@ -1,15 +1,33 @@
 package presentacio.controladorsVistes;
 
-public class ControladorBarraFulles {
+import presentacio.vistes.VistaBarraFulles;
+
+public class ControladorMenuFulles {
     /**
      * Classe encarregada de la comunicació de la barra inferior i de les operacions amb fulles amb la resta de la app.
      * Aquesta classe avisarà en el cas de que es crei una fulla o es modifiqui alguna cosa d'aquesta.
      */
+
+    /**
+     * Controlador de la vista principal, aixo ens permet communicar-nos amb la resta dels components que conformen la
+     * app
+     */
     private ControladorVistaPrincipal vp;
-    private VistaMenuFulles menu;
-    public ControladorBarraFulles(ControladorVistaPrincipal inp){
+
+    /**
+     * Variable que conté el component o vista a afegir a la VistaPrincipal.
+     */
+    private VistaBarraFulles menu;
+
+    /**
+     * Funció constructora que li passem el controlador de la vista principal ja que d'aquesta manera ens podem comunicar
+     * amb tots els components de la part principal del programa
+     * @param inp Controlador de la vista principal que conté la resta de controladors i la resta de vistes que conformen
+     *             la vista principal.
+     */
+    public ControladorMenuFulles(ControladorVistaPrincipal inp){
         vp = inp;
-        menu = new VistaMenuFulles();
+        menu = new VistaBarraFulles(vp.vp.mainFrame);
     }
 
     /**

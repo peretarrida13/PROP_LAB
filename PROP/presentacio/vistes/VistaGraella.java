@@ -8,13 +8,18 @@ import java.io.File;
 import javax.swing.table.DefaultTableCellRenderer;
 
 public class VistaGraella {
+    /**
+     * Classe encarregada de crear la graella on tenim totes les cel·les i les funcionalitats d'aquestes.
+     */
 
+    /**
+     * Panel principal on ens mourem i tindrem les cel·les amb els respectius valors.
+     */
     public JScrollPane mainGrid;
 
-    static JLabel selectedCell;
 
-    /*
-        retorna la graella de texts principals.
+    /**
+     * Funció creadora que crea una taula i la inicialitza amb tot de cel·les buides.
     */
     public VistaGraella() {
         int files = 100;
@@ -70,7 +75,6 @@ public class VistaGraella {
                 } else if(SwingUtilities.isLeftMouseButton(e)){
 
                     char c = int2char(grid.getSelectedColumn());
-                    selectedCell.setText("" + c + (1 + grid.getSelectedRow()));
 
                     String out = "";
                     if(grid.getValueAt(grid.getSelectedRow(), grid.getSelectedColumn()) != null) out = "" + grid.getValueAt(grid.getSelectedRow(), grid.getSelectedColumn());
@@ -84,9 +88,15 @@ public class VistaGraella {
         mainGrid = new JScrollPane(grid);
     }
 
-    /*
-        menu que apareix al fer click dret a qualsevol part de la pantalla que no sigui el menu de baix.
-    */
+    /**
+     * Funció creadora que donada una fulla farà el display d'aquesta.
+     */
+    public VistaGraella(Fulla f){}
+
+    /**
+     * Funció encarregada de crear el menu que apareix al fer el click dret en qualsevol lloc de la graella
+     * @return retorna el menu que veiem al fer click dret a qualsevol part de la graella.
+     */
     private static JPopupMenu menuClickDret(){
         JPopupMenu menu = new JPopupMenu("menu");
         
@@ -138,17 +148,47 @@ public class VistaGraella {
         return menu;
     }
 
+    /**
+     * Funcio que ens ajuda a canviar de enter a caràcter.
+     * @param i enter que volem convertir a caràcter.
+     * @return retorna el caràcter que correspon el nom.
+     */
     private static char int2char(int i){
         return (char)(i + 64);
     }
 
+
+    /**
+     * Classe creada per canviar el color del fons de les cel·les no té res de funcionalitat és només per estetica del
+     * programa
+     */
     class MyRenderer extends DefaultTableCellRenderer {
+        /**
+         * Colors tant del background de les cel·les com nom d'aquestes.
+         */
         Color bg, fg;
+
+        /**
+         * Funció creadora que posa els nous colors.
+         * @param bg color del fons de la cel·la.
+         * @param fg color del text de la cel·la.
+         */
         public MyRenderer(Color bg, Color fg) {
             super();
             this.bg = bg;
             this.fg = fg;
         }
+
+        /**
+         * Funció que canvia el clor del fons de la cel·la
+         * @param table Taula que volem canviar el color de la cel·la
+         * @param value Cel·la que li volem canviar el color
+         * @param isSelected si esta seleccionada o no.
+         * @param hasFocus si està enfocada o no.
+         * @param row fila que pertany.
+         * @param column columna que pertany
+         * @return
+         */
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             Component cell = super.getTableCellRendererComponent(table, value, 
             isSelected, hasFocus, row, column);

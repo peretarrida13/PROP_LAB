@@ -1,8 +1,31 @@
 package presentacio.controladorsVistes;
 
-public class ControladorMenu {
+import presentacio.vistes.VistaMenuBar;
 
-    public ControladorMenu(){}
+public class ControladorMenu {
+    /**
+     * Controlador del menu de la part superior que conté totes les funcionalitats del programa, serà l'encarregat
+     * d'ajudar el usuari a l'hora de realitzar aquestes funcions.
+     */
+
+    /**
+     * Component principal d'aquesta classe està contingut en aquesta variable
+     */
+    public VistaMenuBar menuBar;
+
+    /**
+     * Controlador de la vista principal que ens ajudarà a comunicar-nos amb la resta del programa.
+     */
+    public ControladorVistaPrincipal vp;
+
+    /**
+     * Funció creadora que inicialitza el component prinicpal.
+     * @param inp Controlador de la Vista principal per poder-nos comunicar amb la resta de components.
+     */
+    public ControladorMenu(ControladorVistaPrincipal inp){
+        vp = inp;
+        menuBar = new VistaMenuBar(inp.vp.mainFrame);
+    }
 
     /**
      * Funcio que ajuda al usuari a fer la suma.
