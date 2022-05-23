@@ -1,16 +1,17 @@
 package presentacio.controladorsVistes;
 
-public class ControladorPopUpAdv {
+public class ControladorVistaError {
+
     /**
      * Controlador especialitzat en comunicar si una funció ha de continuar o no la seva excecució després que el
      * pop up d'advertencia sigui activat pel fet de realitzar un gran canvi en el programa.
      */
     private ControladorVistaPrincipal vp;
-    private vistaAdvertencia vista;
+    private vistaError vista;
 
-    public ControladorPopUpAdv(ControladorVistaPrincipal inp){
+    public ControladorVistaError(ControladorVistaPrincipal inp){
         vp = inp;
-        vista = new VistaAdvertencia();
+        vista = new vistaError();
     }
 
     /**
@@ -21,13 +22,4 @@ public class ControladorPopUpAdv {
     public void setText(String errorMsg){
         vistaError.canviaText();
     }
-
-    /**
-     * Funció encarregada de dir-li al programa si ha de continuar o no la seva execució.
-     * @pre -
-     * @post en funció del botó clicat per l'usuari el programa abortara la funció que esta realitzant.
-     */
-    public void realitzarFuncio(){
-    }
-
 }

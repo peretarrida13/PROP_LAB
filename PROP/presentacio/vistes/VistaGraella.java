@@ -5,10 +5,13 @@ import java.awt.*;
 import java.awt.event.*;
 
 import java.io.File;
+import javax.swing.table.DefaultTableCellRenderer;
 
 public class VistaGraella {
 
     public JScrollPane mainGrid;
+
+    static JLabel selectedCell;
 
     /*
         retorna la graella de texts principals.
@@ -54,7 +57,7 @@ public class VistaGraella {
         }
 
         //canviar el color de la columna amb la classe de baix
-        // grid.getColumnModel().getColumn(0).setCellRenderer(new MyRenderer(Color.lightGray, Color.black));
+        grid.getColumnModel().getColumn(0).setCellRenderer(new MyRenderer(Color.lightGray, Color.black));
         grid.getTableHeader().setBackground(Color.lightGray);
 
         //menu click dret
@@ -67,7 +70,7 @@ public class VistaGraella {
                 } else if(SwingUtilities.isLeftMouseButton(e)){
 
                     char c = int2char(grid.getSelectedColumn());
-                    // selectedCell.setText("" + c + (1 + grid.getSelectedRow()));
+                    selectedCell.setText("" + c + (1 + grid.getSelectedRow()));
 
                     String out = "";
                     if(grid.getValueAt(grid.getSelectedRow(), grid.getSelectedColumn()) != null) out = "" + grid.getValueAt(grid.getSelectedRow(), grid.getSelectedColumn());
@@ -137,6 +140,26 @@ public class VistaGraella {
 
     private static char int2char(int i){
         return (char)(i + 64);
+    }
+
+    class MyRenderer extends DefaultTableCellRenderer {
+        Color bg, fg;
+        public MyRenderer(Color bg, Color fg) {
+            super();
+            this.bg = bg;
+            this.fg = fg;
+        }
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            Component cell = super.getTableCellRendererComponent(table, value, 
+            isSelected, hasFocus, row, column);
+            cell.setBackground(bg);
+            cell.setForeground(fg);
+            
+            //centrar text columna dreta
+            ((DefaultTableCellRenderer)cell).setHorizontalAlignment(JLabel.CENTER);
+    
+            return cell;
+        }
     }
     
 }

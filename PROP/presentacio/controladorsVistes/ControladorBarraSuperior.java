@@ -3,6 +3,7 @@ package presentacio.controladorsVistes;
 import presentacio.vistes.VistaMenuBar;
 
 public class ControladorBarraSuperior {
+
     /**
      * Classe encarregada de comunicar la barra superior amb el controlador de domini i amb la part de la graella de la
      * part principal
@@ -13,7 +14,6 @@ public class ControladorBarraSuperior {
     public ControladorBarraSuperior(ControladorVistaPrincipal inp){
         menu = new VistaMenuBar();
         cntlVp = inp;
-
     }
 
     /**

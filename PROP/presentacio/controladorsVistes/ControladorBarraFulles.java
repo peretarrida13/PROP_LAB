@@ -5,7 +5,12 @@ public class ControladorBarraFulles {
      * Classe encarregada de la comunicació de la barra inferior i de les operacions amb fulles amb la resta de la app.
      * Aquesta classe avisarà en el cas de que es crei una fulla o es modifiqui alguna cosa d'aquesta.
      */
-    public ControladorBarraFulles(){}
+    private ControladorVistaPrincipal vp;
+    private VistaMenuFulles menu;
+    public ControladorBarraFulles(ControladorVistaPrincipal inp){
+        vp = inp;
+        menu = new VistaMenuFulles();
+    }
 
     /**
      * Funció qeu cridem quan afegir una fulla en el document actual.

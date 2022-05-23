@@ -14,6 +14,8 @@ public class VistaPrincipal {
     static String fullaActiva;
 
     static HashMap<String, JScrollPane> fulles = new HashMap<>();
+
+    public JLabel selectedCell;
     
     
     /*
@@ -27,20 +29,22 @@ public class VistaPrincipal {
         
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setSize(1500, 1000);
+
+        VistaMenuBar vistaMenuBar = new VistaMenuBar(mainFrame, selectedCell, fullaActiva,fulles);
     
-        mainFrame.setJMenuBar(new VistaMenuBar().menuBar);
+        mainFrame.setJMenuBar(vistaMenuBar.menuBar);
 
         GridBagConstraints gbc = new GridBagConstraints();
 
 
-        // JPanel topBar = topTextBar();
+        JPanel topBar = vistaMenuBar.topTextBar;
 
-        // gbc.gridx = 0;
-        // gbc.gridy = 0;
-        // gbc.gridwidth = 1;
-        // gbc.gridheight = 1;
-        // gbc.fill = GridBagConstraints.BOTH;
-        // mainFrame.add(topBar, gbc);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        gbc.fill = GridBagConstraints.BOTH;
+        mainFrame.add(topBar, gbc);
 
 
         JScrollPane grid = new JScrollPane();
@@ -70,15 +74,15 @@ public class VistaPrincipal {
         mainFrame.add(fulles.get("1"), gbc);
 
         // // 0, 1, 1.0, 0.1, 2, 1, GridBagConstraints.BOTH
-        // JScrollPane hojas = new gridView().mainGrid;
-        // gbc.gridx = 0;
-        // gbc.gridy = 2;
-        // gbc.weightx = 1.0;
-        // gbc.weighty = 0.005;
-        // gbc.gridwidth = 2;
-        // gbc.gridheight = 2;
-        // gbc.fill = GridBagConstraints.BOTH;
-        // mainFrame.add(hojas, gbc);
+        JPanel hojas = new VistaMenuFulles(mainFrame, fulles).panelFulles;
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.weightx = 1.0;
+        gbc.weighty = 0.005;
+        gbc.gridwidth = 2;
+        gbc.gridheight = 2;
+        gbc.fill = GridBagConstraints.BOTH;
+        mainFrame.add(hojas, gbc);
     }
 
     /*

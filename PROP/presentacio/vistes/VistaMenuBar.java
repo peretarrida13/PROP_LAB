@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 import java.io.File;
+import java.util.*;
 
 public class VistaMenuBar {
 
@@ -12,15 +13,21 @@ public class VistaMenuBar {
 
     static JFrame menuAfegirFulla;
 
+    public JPanel topTextBar;
+
+    static JTextField topBarInp;
+
     /*
         retorna el menu complet que s'afegira a dalt del mainframe.
     */
-    public VistaMenuBar() {
+    public VistaMenuBar(JFrame mainFrame, JLabel selectedCell, String fullaActiva, HashMap<String, JScrollPane> fulles) {
         menuBar = new JMenuBar();
         menuBar.add(DocumentMenu());
-        menuBar.add(FullaMenu());
-        menuBar.add(BlocMenu());
+        menuBar.add(FullaMenu(mainFrame, fullaActiva, fulles));
+        menuBar.add(BlocMenu(mainFrame));
         menuBar.add(FuncionsMenu());
+
+        topTextBar = topTextBar(mainFrame, selectedCell);
     }
 
     /*
@@ -51,7 +58,7 @@ public class VistaMenuBar {
     /*
         retorna la part de fulla del menu
     */
-    private static JMenu FullaMenu() {
+    private static JMenu FullaMenu(JFrame mainFrame, String fullaActiva, HashMap<String, JScrollPane> fulles) {
         JMenu fileMenu = new JMenu("Fulla");
         JMenuItem newItem = new JMenuItem(new AbstractAction("Afegir Fulla") {
             public void actionPerformed(ActionEvent e) {
@@ -63,9 +70,9 @@ public class VistaMenuBar {
 
         JMenuItem deleItem = new JMenuItem(new AbstractAction("Eliminar Fulla") {
             public void actionPerformed(ActionEvent e) {
-                // fulles.remove(fullaActiva);
+                fulles.remove(fullaActiva);
                 // fullaActiva = "1";
-                // System.out.println(fulles.size());
+                System.out.println(fulles.size());
             }
         });
 
@@ -74,10 +81,10 @@ public class VistaMenuBar {
         JPopupMenu nom = menuCanviarNom();
         JMenuItem canviar = new JMenuItem(new AbstractAction("Canviar Nom Fulla") {
             public void actionPerformed(ActionEvent e) {
-                // int width = (int)(mainFrame.getSize().getWidth() / 2.4);
-                // int height = (int)(mainFrame.getSize().getHeight() / 3);
+                int width = (int)(mainFrame.getSize().getWidth() / 2.4);
+                int height = (int)(mainFrame.getSize().getHeight() / 3);
 
-                // nom.show(mainFrame, width, height);
+                nom.show(mainFrame, width, height);
             }
         });
         fileMenu.add(canviar);
@@ -101,9 +108,9 @@ public class VistaMenuBar {
         JPopupMenu jp = menuBuscar();
         JMenuItem buscar = new JMenuItem(new AbstractAction("Buscar Valor") {
             public void actionPerformed(ActionEvent e) {
-                // int width = (int)mainFrame.getSize().getWidth() - 275;
+                int width = (int)mainFrame.getSize().getWidth() - 275;
 
-                // jp.show(mainFrame, width,55);
+                jp.show(mainFrame, width,55);
             }
         });
         fileMenu.add(buscar);
@@ -111,9 +118,9 @@ public class VistaMenuBar {
         JPopupMenu rempl = menuRemplazar();
         JMenuItem rem = new JMenuItem(new AbstractAction("Remplasar Valor") {
             public void actionPerformed(ActionEvent e) {
-                // int width = (int)mainFrame.getSize().getWidth() - 300;
+                int width = (int)mainFrame.getSize().getWidth() - 300;
 
-                // rempl.show(mainFrame, width,55);
+                rempl.show(mainFrame, width,55);
             }
         });
         fileMenu.add(rem);
@@ -123,16 +130,16 @@ public class VistaMenuBar {
         /*
         retorna la part de bloc del menu
     */
-    private static JMenu BlocMenu() {
+    private static JMenu BlocMenu(JFrame mainFrame) {
         JMenu fileMenu = new JMenu("Bloc");
         //ELIMINA EL DOCUMENT ACTUAL I TREU UN POP UP PER QUE ENTRI LES FILES COLUMNES ETC. treure pop up alertant.
         JPopupMenu seleccionar = seleccionarBloc();
         JMenuItem sel = new JMenuItem(new AbstractAction("Seleccionar Bloc") {
             public void actionPerformed(ActionEvent e) {
-                // int width = (int)(mainFrame.getSize().getWidth() - 375);
+                int width = (int)(mainFrame.getSize().getWidth() - 375);
                 int height = 55;
 
-                // seleccionar.show(mainFrame, width, height);
+                seleccionar.show(mainFrame, width, height);
             }
         });
         fileMenu.add(sel);
@@ -333,4 +340,22 @@ public class VistaMenuBar {
         menu.add(aux);
         return menu;
     }  
+
+    private static JPanel topTextBar(JFrame mainFrame, JLabel selectedCell){
+        JPanel topBar = new JPanel(new FlowLayout(FlowLayout.LEFT));
+
+        JPanel cellContainer = new JPanel();
+
+        selectedCell = new JLabel("A1");
+        cellContainer.add(selectedCell);
+        
+        topBar.add(cellContainer);
+
+        topBarInp = new JTextField("valor cella");
+        topBarInp.setPreferredSize(new Dimension(mainFrame.getWidth() - 55, 30));
+
+        topBar.add(topBarInp);
+
+        return topBar;
+    }
 }
